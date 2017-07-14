@@ -1,0 +1,14 @@
+body {
+    background-color: firebrick;
+}
+textarea {
+    width: 50%;
+    height: 200px;
+    margin: 20px;
+}
+
+#viewer {
+    background-color: aquamarine;
+    margin: 20px;
+    padding: 20px;
+}
