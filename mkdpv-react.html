@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title> React Tutorial - Beau</title>
+    <script src="react.js"></script>
+    <script src="react-dom.js"></script>
+    <script src="babel.min.js"></script>
+	<link rel="stylesheet" href="../mdpreviewer/css/bootstrap.min.css">
+    <link rel="stylesheet" href="style.css" />
+</head>
+    
+<body>
+    <div id="main"></div>
+
+<script src='../mdpreviewer/js/marked/lib/marked.js'></script>
+<script src='../mdpreviewer/js/jquery-3.2.1.min.js'></script>
+<script>
+function mostrar(){
+    var mkviewer = $('#editor').val();
+    $('#viewer').html(marked(mkviewer));
+  }
+
+$(document).ready( function(){
+  mostrar();
+  $('#editor').on('input', mostrar);
+});
+
+</script>
+
+<script  type="text/babel">
+
+   
+    class Editor extends React.Component {
+    	render(){
+    	const defaultText = "# Título\n\n## Subtítulo\n\n*cursiva*\n\n**negrita**\n\nEsto es `inline code`\n\n![Rosa roja](https://upload.wikimedia.org/wikipedia/commons/thumb/5/51/Small_Red_Rose.JPG/320px-Small_Red_Rose.JPG)\n\nUna lista desordenada\n\n* Item \n* Item\n    * subitem\n\nUna lista ordenada\n\n1. Item 1\n2. Item 2\n3. Item 3\n    * Item 3a\n\n[ZDFlower Portfolio](https://codepen.io/zdflower/full/mWEpoz)\n\nSócrates dijo:\n\n>\"Sólo sé que no sé nada.\"\n\nBloque de código:\n```javascript\n function theAnswer(){\n    return 42;\n }\n```";
+    	    return(
+				<textarea rows="30" id="editor">
+				{defaultText}
+				</textarea>
+    	    );
+    	}
+    }
+
+    class Viewer extends React.Component {
+    	render(){
+    	    return(
+    	    	<div id="viewer"></div>
+    	    );
+    	}
+    }
+
+    class MarkdownPreviewerApp extends React.Component {
+        constructor(props){
+            super(props);
+        }
+
+        render(){
+            return(
+            <div className="container">
+            	<div className="row display-flex">
+	            	<div className="col-xs-12 col-sm-6">
+						<Editor />
+					</div>
+	            	<div className="col-xs-12 col-sm-6">
+						<Viewer />
+					</div>
+	            </div>
+	        </div>
+            );
+        }
+    }
+
+    ReactDOM.render(
+        <MarkdownPreviewerApp />, document.getElementById('main')
+    );
+
+    </script>
+</body>
+</html>
