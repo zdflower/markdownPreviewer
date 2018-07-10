@@ -1,0 +1,52 @@
+const text = "# Título\n## Subtítulo\n*cursiva*\n**negrita**\nEsto es `inline code`\n![Rosa roja](https://upload.wikimedia.org/wikipedia/commons/thumb/5/51/Small_Red_Rose.JPG/320px-Small_Red_Rose.JPG)\nUna lista desordenada\n* Item \n* Item \n    * subitem \n\nUna lista ordenada\n1. Item 1\n2. Item 2\n3. Item 3\n    * Item 3a\n\n[ZDFlower Portfolio](https://codepen.io/zdflower/full/mWEpoz)\n\nSócrates dijo:\n> 'Sólo sé\n> que no sé nada.'\n\n\nBloque de código:\n ```javascript\nfunction theAnswer()\{\n    return 42;\n\}```"
+
+
+class App extends React.Component {
+  constructor(){
+    super();
+    this.state = {markup: text};
+    this.handleChange = this.handleChange.bind(this);
+  }
+  
+  handleChange(event){
+    this.setState({markup: event.target.value});
+  }
+  
+  render(){
+    return (
+      <div className="row">
+    <div className="col-xs-12 col-sm-6">
+      <Editor markup={this.state.markup} handleChange={this.handleChange}/>
+            
+    </div>
+    <div className="col-xs-12 col-sm-6">
+      <Previewer markup={this.state.markup}/>
+    </div>
+  </div>
+    );
+  }
+}
+
+
+function Editor(props){
+  return (
+    <textarea rows="34" id="editor" onChange={props.handleChange}>
+      {props.markup}
+    </textarea>
+  )
+}
+
+function Previewer(props){
+  return (
+    <div id="preview" dangerouslySetInnerHTML={createMarkup(props.markup)}>
+    </div>
+  );
+}
+
+
+  // https://reactjs.org/docs/dom-elements.html#dangerouslysetinnerhtml
+ function createMarkup(markup){
+    return {__html: marked(markup)};
+  }
+
+ReactDOM.render(<App />, document.getElementById("app"));

@@ -1,14 +1,18 @@
 body {
     background-color: firebrick;
 }
-textarea {
-    width: 50%;
-    height: 200px;
-    margin: 20px;
+
+#editor, #preview {
+    padding: 20px;
+   	margin: 10% auto;
+	  width: 100%;
 }
 
-#viewer {
+#preview {
     background-color: aquamarine;
-    margin: 20px;
-    padding: 20px;
+}
+
+img {
+  width: 100%;
+  margin: auto;
 }
